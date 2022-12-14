@@ -1,0 +1,498 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter Tight";
+  background: #283048;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #859398, #283048);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #859398, #283048);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+a {
+  text-decoration: none;
+}
+
+#applet {
+  background: #283048;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #859398, #283048);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #859398, #283048);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 100%;
+  grid-template-rows: 40px 10px 40px 40px auto;
+  grid-template-areas: "header" "headerGap" "groups" "groupEditor" "sections";
+}
+
+header {
+  height: 40px;
+  line-height: 40px;
+  width: calc(100% - 20px);
+  margin: 0;
+  padding: 0 10px;
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  grid-template-rows: 40px;
+}
+header h2 {
+  margin: 0;
+  padding: 0;
+  grid-column: 1/span 1;
+  grid-row: 1;
+  color: #ccc;
+  box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.3);
+}
+header nav {
+  grid-column: 2/span 1;
+  grid-row: 1;
+}
+header nav button {
+  display: none;
+}
+
+.headerGap, .groupGap {
+  height: 10px;
+  width: 100%;
+}
+
+#groupList {
+  padding: 0 10px;
+  grid-area: groups;
+  display: grid;
+  grid-template-rows: 40px;
+  grid-template-columns: 1fr auto;
+}
+
+.groupsContainer {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 40px;
+  grid-template-columns: repeat(8, minmax(auto, 1fr));
+  grid-column-gap: 4px;
+}
+
+#groupEditorForm {
+  grid-area: groupEditor;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  width: calc(100% - 40px);
+  height: 30px;
+  padding: 10px;
+  justify-self: center;
+  border-top-right-radius: 6px;
+  display: grid;
+  grid-template-columns: 100px minmax(120px, auto) 90px 1fr auto;
+  grid-template-rows: 30px;
+}
+#groupEditorForm label {
+  color: #ccc;
+  grid-row: 1/span 1;
+  grid-column: 1/span 1;
+  height: 30px;
+  line-height: 30px;
+}
+#groupEditorForm input {
+  background: #373737;
+  color: #ccc;
+  border: none;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  grid-row: 1/span 1;
+  grid-column: 2/span 1;
+}
+#groupEditorForm input:focus {
+  outline: none;
+  border: 1px inset #ccc;
+  box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+#groupEditorForm #gName {
+  grid-row: 1/span 1;
+  grid-column: 2/span 1;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 5px;
+  text-align: center;
+}
+#groupEditorForm .groupButtons {
+  grid-row: 1/span 1;
+  grid-columns: 3/span 1;
+  width: 80px;
+  display: grid;
+  grid-template-rows: 40px;
+  grid-row-gap: 5px;
+  padding: 0px 10px;
+}
+#groupEditorForm #updateGroup {
+  display: none;
+  grid-column: 1/span 1;
+  grid-row: 1/span 1;
+  width: 30px;
+  height: 30px;
+}
+#groupEditorForm #updateGroup button {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: rgba(0, 255, 40, 0.4);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  grid-row: 1/span 1;
+  font-size: 8px;
+  text-align: center;
+}
+#groupEditorForm #updateGroup button:hover {
+  background-color: #00ff28;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+#groupEditorForm #deleteGroup {
+  grid-row: 1/span 1;
+  width: 30px;
+  height: 30px;
+}
+#groupEditorForm #deleteGroup button {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  grid-row: 1/span 1;
+  font-size: 8px;
+  text-align: center;
+}
+#groupEditorForm #deleteGroup button:hover {
+  background-color: red;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+#groupEditorForm #createSectionButton {
+  grid-row: 1/span 1;
+  grid-column: 5/span 1;
+  display: grid;
+  grid-template-columns: 100%;
+  height: 30px;
+  line-height: 30px;
+  justify-content: right;
+}
+#groupEditorForm #createSectionButton button {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #ccc;
+  background-color: rgba(0, 135, 255, 0.15);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+#groupEditorForm #createSectionButton button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 135, 255, 0.3);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.gNameLabel {
+  font-size: 14px;
+  line-height: 30px;
+  padding: 0px 5px;
+}
+
+#sectionList {
+  grid-area: sections;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 270px;
+  padding: 10px;
+  grid-row-gap: 10px;
+}
+
+.groupSection {
+  display: grid;
+  grid-template-rows: 40px repeat(5, 30px) 50px;
+  grid-row-gap: 5px;
+  color: #ccc;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-height: 270px;
+  height: 270px;
+}
+
+.groupBuilderContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px;
+}
+
+.secNameID, .secBuilderNameID, .groupBuilderNameID {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.groupBuilderNameID {
+  padding: 5px;
+}
+.groupBuilderNameID input {
+  height: 30px;
+  padding-left: 5px;
+  background: #373737;
+}
+
+.secLength, .secOffset, .secDir, .secColor, .secPattern, .secButtons, #secBuilderLength, #secBuilderOffset, #secBuilderDir, #secBuilderColor, #secBuilderPattern, #secBuilderButtons {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+}
+.secLength input, .secLength select, .secOffset input, .secOffset select, .secDir input, .secDir select, .secColor input, .secColor select, .secPattern input, .secPattern select, .secButtons input, .secButtons select, #secBuilderLength input, #secBuilderLength select, #secBuilderOffset input, #secBuilderOffset select, #secBuilderDir input, #secBuilderDir select, #secBuilderColor input, #secBuilderColor select, #secBuilderPattern input, #secBuilderPattern select, #secBuilderButtons input, #secBuilderButtons select {
+  border: none;
+  background: #373737;
+  color: #ccc;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.secLength input:focus, .secLength select:focus, .secOffset input:focus, .secOffset select:focus, .secDir input:focus, .secDir select:focus, .secColor input:focus, .secColor select:focus, .secPattern input:focus, .secPattern select:focus, .secButtons input:focus, .secButtons select:focus, #secBuilderLength input:focus, #secBuilderLength select:focus, #secBuilderOffset input:focus, #secBuilderOffset select:focus, #secBuilderDir input:focus, #secBuilderDir select:focus, #secBuilderColor input:focus, #secBuilderColor select:focus, #secBuilderPattern input:focus, #secBuilderPattern select:focus, #secBuilderButtons input:focus, #secBuilderButtons select:focus {
+  outline: none;
+  border: 1px inset #ccc;
+  box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.sectionNameLabel {
+  height: 30px;
+  width: 60px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.sectionNameInput {
+  justify-self: left;
+  height: 30px;
+  padding: 0 10px;
+  width: calc(100% - 20px);
+  grid-column: 2/span 5 !important;
+  line-height: 30px;
+  border: none;
+  border-radius: 0px;
+  border-bottom-right-radius: 6;
+  border-top-right-radius: 6;
+  background: #373737;
+  color: #ccc;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.sectionNameInput:focus {
+  outline: none;
+  border: 1px inset #ccc;
+  box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.sectionButtons {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  height: 40px;
+  grid-column-gap: 10px;
+  padding: 5px;
+}
+.sectionButtons button {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.updateSection, .saveSection {
+  border-radius: 6px;
+  background-color: rgba(0, 160, 40, 0.5);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  font-weight: 600;
+  text-align: center;
+}
+.updateSection:hover, .saveSection:hover {
+  background-color: #00a028;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.deleteSection, .cancelSection {
+  border-radius: 6px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  background-color: rgba(200, 0, 0, 0.5);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  text-align: center;
+  font-weight: 600;
+}
+.deleteSection:hover, .cancelSection:hover {
+  background-color: #c80000;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+#sectionBuilderContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px repeat(5, 30px) 40px;
+  grid-row-gap: 5px;
+  padding-bottom: 10px;
+}
+
+.groupBuilderButtons {
+  grid-row: 3/spam1;
+  grid-column: 1/span 4;
+  display: grid;
+  grid-template-columns: 7fr 1fr;
+  height: 40px;
+  grid-template-rows: 40px;
+  line-height: 40px;
+  grid-column-gap: 20px;
+  padding: 10px;
+}
+
+#saveGroup {
+  grid-row: 1/span1;
+  grid-column: 1/span7;
+  background-color: rgba(0, 160, 40, 0.5);
+  border-radius: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  font-weight: 600;
+  text-align: center;
+}
+#saveGroup:hover {
+  background-color: #00a028;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+#cancelGroup {
+  grid-row: 1/span1;
+  grid-column: 8/span1;
+  border-radius: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  background-color: rgba(200, 0, 0, 0.5);
+  border-width: 1px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  border-color: #ccc;
+  color: #ccc;
+  text-align: center;
+  font-weight: 600;
+}
+#cancelGroup:hover {
+  background-color: #c80000;
+  cursor: pointer;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+#createGroupButton {
+  border-radius: 10px;
+  font-weight: 500;
+  height: 30px;
+  padding: 5px 15px;
+}
+#createGroupButton:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.glassPlate {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border-top-width: 1px;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+}
+
+.groupTab {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: none;
+  font-weight: 500;
+  text-shadow: 1px 1px 3px rgba(50, 50, 50, 0.2);
+}
+.groupTab:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 20px -5px rgba(255, 255, 255, 0.1);
+}
+
+@media only screen and (max-width: 600px) {
+  #createSectionButton span {
+    display: none;
+  }
+
+  .gNameLabel {
+    font-size: 12px;
+  }
+}
+.blocker {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px);
+}
+
+.modal {
+  background-color: rgba(170, 170, 170, 0) !important;
+  border: 0px solid #ccc !important;
+  border-top-width: 1px !important;
+  padding: 5px !important;
+  color: #ccc;
+  font-weight: 600;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px);
+}
+.modal input {
+  background: #373737;
+  color: #ccc;
+  border: none;
+  box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=nebulize.css.map */

@@ -1,0 +1,523 @@
+$darkGrey: #111;
+$mediumGrey: #333;
+$lightGrey: #555;
+$lighterGrey: #999;
+$lightestGrey: #ccc;
+$mainColor: #22f5ff;
+$secondaryColor: #baff22;
+
+body{
+	margin: 0;
+	padding: 0;
+	font-family: 'Inter Tight';
+	background: #283048;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+a{
+	text-decoration: none;
+}
+
+#applet{
+	background: #283048;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	display: grid;
+	height: 100vh;
+	grid-template-columns: 100%;
+	grid-template-rows: 40px 10px 40px 40px auto;
+	grid-template-areas: 
+    "header"
+    "headerGap"
+    "groups"
+    "groupEditor"
+    "sections";
+}
+
+header{	
+	height: 40px;
+	line-height: 40px;
+	width: calc(100% - 20px);
+	margin:0;
+	padding: 0 10px;
+	grid-area: header;
+	display: grid;
+	grid-template-columns: 1fr 40px;
+	grid-template-rows: 40px;
+
+	h2{
+		margin:0;
+		padding: 0;
+		grid-column: 1 / span 1;
+		grid-row:1;
+		color: $lightestGrey;
+		box-shadow: 0 4px 4px -4px rgba(0,0,0,.3);
+	}
+
+	nav{
+		grid-column: 2 / span 1;
+		grid-row: 1;
+
+		button{
+			display:none;
+		}
+	}
+}
+
+.headerGap, .groupGap{
+	height: 10px;
+	width: 100%;
+}
+
+
+#groupList{
+	padding: 0 10px;
+	grid-area: groups;
+	display: grid;
+	grid-template-rows: 40px;
+	grid-template-columns: 1fr auto;
+}
+
+.groupsContainer{
+	width: 100%;
+	display: grid;
+	grid-template-rows: 40px;
+	grid-template-columns: repeat(8, minmax(auto, 1fr));
+	grid-column-gap: 4px;
+}
+
+#groupEditorForm{
+	grid-area: groupEditor;
+	background-image: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.0));
+	width: calc(100% - 40px);
+	height: 30px;
+	padding: 10px;
+	justify-self: center;
+	border-top-right-radius: 6px;
+	display: grid;
+	grid-template-columns: 100px minmax(120px, auto) 90px 1fr auto;
+	grid-template-rows: 30px;
+
+	label{
+		color: $lightestGrey;
+		grid-row: 1 / span 1;
+		grid-column: 1 / span 1;
+		height: 30px;
+		line-height: 30px;
+	}
+	input{
+		background: rgb(55, 55, 55);
+		color: $lightestGrey;
+		border: none;
+		box-shadow: inset 2px 2px 3px rgba(0,0,0,.2);
+		border-radius: 4px;
+		grid-row: 1 / span 1;
+		grid-column: 2 / span 1;
+		&:focus{
+			outline: none;
+			border: 1px inset $lightestGrey;
+			box-shadow: inset 4px 4px 6px rgba(0,0,0,.3);
+			position: relative;
+		}
+	}
+	#gName{
+		grid-row: 1 / span 1;
+		grid-column: 2 / span 1;
+		height: 30px;
+		line-height: 30px;
+		padding-left: 5px;
+		text-align: center;
+	} 
+
+	.groupButtons{
+		grid-row: 1 / span 1;
+		grid-columns: 3 / span 1;
+		width: 80px;
+		display: grid;
+		grid-template-rows: 40px;
+		grid-row-gap: 5px;
+		padding: 0px 10px;
+	}
+
+	#updateGroup{
+		display: none;
+		grid-column: 1 / span 1;
+		grid-row: 1 / span 1;
+		width: 30px;
+		height: 30px;
+		button{
+			width: 100%;
+			height: 100%;
+			border-radius: 8px;
+			background-color: rgba(0, 255, 40, 0.4);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			grid-row: 1 / span 1;
+			font-size: 8px;
+			text-align: center;
+			&:hover{
+				background-color: rgba(0, 255, 40, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+		}
+	} 
+	#deleteGroup{
+		grid-row: 1 / span 1;
+		width: 30px;
+		height: 30px;
+		button{
+			width: 100%;
+			height: 100%;
+			border-radius: 8px;
+			background-color: rgba(255, 0, 0, 0.4);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			grid-row: 1 / span 1;
+			font-size: 8px;
+			text-align: center;
+			&:hover{
+				background-color: rgba(255, 0, 0, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+		}
+	}
+
+	#createSectionButton{
+		grid-row: 1 / span 1;
+		grid-column: 5 / span 1;
+		display: grid;
+		grid-template-columns: 100%;
+		height: 30px;
+		line-height: 30px;
+		justify-content: right;
+		button{
+			width: 100%;
+			height: 30px;
+			line-height: 30px;
+			text-decoration: none;
+			padding: 0 10px;
+			font-size: 14px;
+			color: $lightestGrey;
+			background-color: rgba(0, 135, 255, 0.15);
+			border-radius: 10px;
+			border: 1px solid $lightestGrey;
+			border-left:none;
+			border-right:none;
+			border-bottom: none;
+
+			&:hover{
+				cursor: pointer;
+				background-color: rgba(0, 135, 255, 0.3);
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+		}
+	}
+}
+
+.gNameLabel{
+	font-size: 14px;
+	line-height: 30px;
+	padding: 0px 5px;
+}
+
+#sectionList{
+	grid-area: sections;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 270px;
+	padding: 10px;
+	grid-row-gap: 10px;
+}
+
+.groupSection{
+	display: grid;
+	grid-template-rows: 40px repeat(5, 30px) 50px;
+	grid-row-gap: 5px;
+	color: $lightestGrey;
+	border-radius: 6px;
+	border: 1px solid $lightestGrey;
+	max-height: 270px;
+	height: 270px;
+	}
+
+.groupBuilderContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px;
+}
+
+.secNameID, .secBuilderNameID, .groupBuilderNameID{
+	display: grid;
+	grid-template-columns: auto 1fr;
+	background-color: rgba(255,255,255,.1);
+	padding: 5px 10px;
+	border-radius: 6px;
+}
+
+.groupBuilderNameID{
+	padding: 5px;
+	input{
+		height:30px;
+		padding-left: 5px;
+		background: rgb(55, 55, 55);
+	}
+}
+
+.secLength, .secOffset, .secDir, .secColor, .secPattern, .secButtons, #secBuilderLength, #secBuilderOffset, #secBuilderDir, #secBuilderColor, #secBuilderPattern, #secBuilderButtons{
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	height:30px;
+	line-height: 30px;
+	padding: 0 5px;
+
+	input, select{
+	border: none;
+	background: rgb(55, 55, 55);
+	color: $lightestGrey;
+	box-shadow: inset 2px 2px 3px rgba(0,0,0,.2);
+	border-radius: 4px;
+	&:focus{
+		outline: none;
+		border: 1px inset $lightestGrey;
+		box-shadow: inset 4px 4px 6px rgba(0,0,0,.3);
+		position: relative;
+	}
+	}
+}
+
+.sectionNameLabel{
+	height: 30px;
+	width: 60px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 6px;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.sectionNameInput{
+	justify-self: left;
+	height: 30px;
+	padding: 0 10px;
+	width: calc(100% - 20px);
+	grid-column: 2 / span 5!important;
+	line-height: 30px;
+	border: none;
+	border-radius: 0px;
+	border-bottom-right-radius: 6;
+	border-top-right-radius: 6;
+	background: rgb(55, 55, 55);
+	color: $lightestGrey;
+	box-shadow: inset 2px 2px 3px rgba(0,0,0,.2);
+	border-radius: 4px;
+	
+	&:focus{
+		outline: none;
+		border: 1px inset $lightestGrey;
+		box-shadow: inset 4px 4px 6px rgba(0,0,0,.3);
+		position: relative;
+	}
+}
+
+.sectionButtons{
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	height: 40px;
+	grid-column-gap: 10px;
+	padding: 5px;
+	button{
+		height: 40px;
+		line-height: 40px;
+		padding: 0 10px;
+		width: 100%;
+	}
+}
+
+
+.updateSection, .saveSection{
+	border-radius: 6px;
+	background-color: rgba(0, 160, 40, 0.5);
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			font-weight: 600;
+			text-align: center;
+			&:hover{
+				background-color: rgba(0, 160, 40, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+}
+.deleteSection, .cancelSection{
+	border-radius: 6px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+			background-color: rgba(200, 0, 0, 0.5);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			text-align: center;
+			font-weight: 600;
+			&:hover{
+				background-color: rgba(200, 0, 0, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+}
+
+//hide group & section builders on load
+#groupBuilderForm, #sectionBuilderForm{
+	//display: inline-grid;
+}
+
+#sectionBuilderContainer{
+	display:grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 40px repeat(5, 30px) 40px;
+	grid-row-gap: 5px;
+	padding-bottom: 10px;
+}
+
+
+.groupBuilderButtons{
+	grid-row: 3/spam1;
+	grid-column: 1 / span 4;
+	display: grid;
+	grid-template-columns: 7fr 1fr;
+	height: 40px;
+	grid-template-rows: 40px;
+	line-height: 40px;
+	grid-column-gap: 20px;
+	padding: 10px;
+}
+#saveGroup{
+	grid-row: 1/span1;
+	grid-column: 1/span7;
+	background-color: rgba(0, 160, 40, 0.5);
+	border-radius: 10px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			font-weight: 600;
+			text-align: center;
+			&:hover{
+				background-color: rgba(0, 160, 40, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+}
+#cancelGroup{
+	grid-row: 1/span1;
+	grid-column: 8/span1;
+	border-radius: 10px;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+			background-color: rgba(200, 0, 0, 0.5);
+			border-width: 1px;
+			border-bottom: none;
+			border-right: none;
+			border-left: none;
+			border-color: $lightestGrey;
+			color: $lightestGrey;
+			text-align: center;
+			font-weight: 600;
+			&:hover{
+				background-color: rgba(200, 0, 0, 1);
+				cursor: pointer;
+				box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+			}
+}
+
+
+#createGroupButton{
+	border-radius: 10px;
+	font-weight: 500;
+	height: 30px;
+	padding: 5px 15px;
+	 &:hover{
+	cursor: pointer;
+	background-color: rgba(255,255,255,.2);
+	box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+  	}
+}
+
+.glassPlate{
+	background-color: rgba(255,255,255,.1);
+	color: $lightestGrey;
+	border-top-width: 1px;
+	border-right: none;
+	border-bottom: none;
+	border-left: none;
+}
+
+.groupTab{
+	width: 100%;
+	height: 40px;
+	border-radius: 6px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	box-shadow: none;
+	font-weight: 500;
+	text-shadow: 1px 1px 3px rgba(50,50,50,.2);
+ 	&:hover{
+	cursor: pointer;
+	background-color: rgba(255,255,255,.2);
+	box-shadow: 0 20px 20px -5px rgba(255,255,255,.1);
+  	}
+}
+
+@media only screen and (max-width: 600px) {
+	#createSectionButton{
+		span{
+			//font-size: 12px;
+			display: none;
+		}
+	}
+
+		.gNameLabel{
+		font-size: 12px;
+	}
+}
+
+.blocker{
+	background-color: rgba(0,0,0,.3)!important;
+	backdrop-filter: blur(10px);
+}
+
+.modal{
+	background-color: rgba(170,170,170,0)!important;
+	border: 0px solid $lightestGrey!important;
+	border-top-width: 1px!important;
+	padding: 5px!important;
+	color: $lightestGrey;
+	font-weight: 600;
+	box-shadow: 0px 0px 20px rgba(0,0,0,.3)!important;
+	backdrop-filter: blur(10px);
+	input{
+		background: rgb(55, 55, 55);
+		color: $lightestGrey;
+		border: none;
+		box-shadow: inset 2px 2px 3px rgba(0,0,0,.2);
+		border-radius: 4px;
+	}
+}
